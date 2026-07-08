@@ -9,9 +9,12 @@ A single-page marketing site for a Singapore-based football club, built with pla
 ## Features
 
 - Sticky, responsive navbar with a mobile hamburger menu
-- Hero section with calls-to-action and a quick facts strip
-- Testimonials grid with scroll-triggered fade-in animations
+- Hero section with a scoreboard-style stats strip and a staggered entrance animation (respects `prefers-reduced-motion`)
+- Pitch-line "kickoff mark" dividers between sections and a club crest badge, tying the visual identity to the sport
+- Programs section listing all five squads (Mini Hawks through Adult League)
+- Why Us trust section and a testimonials grid with scroll-triggered fade-in animations
 - Trial enquiry form with client-side validation (name, email, phone) and accessible inline error messages
+- SEO metadata: descriptive title/description, Open Graph & Twitter cards, canonical URL, and JSON-LD structured data
 - Footer with contact details, quick links, and an auto-updating copyright year
 
 ## Getting started
