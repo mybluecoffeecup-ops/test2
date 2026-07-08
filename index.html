@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerald Hawks FC | Being Better, Together</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Variables & Reset ---------- */
+  :root {
+    --green-dark: #0b3d24;
+    --green: #146b3a;
+    --green-light: #1f8f4e;
+    --yellow: #ffcc33;
+    --yellow-light: #ffe08a;
+    --accent: #ff8a3d;
+    --accent-dark: #e5701f;
+    --white: #ffffff;
+    --off-white: #f6faf7;
+    --gray-text: #52605a;
+    --dark-text: #12271a;
+    --border: #e1e9e3;
+    --radius: 14px;
+    --shadow: 0 10px 30px rgba(11, 61, 36, 0.12);
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    color: var(--dark-text);
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; }
+
+  p { margin: 0 0 1em; }
+
+  a { color: inherit; }
+
+  img { max-width: 100%; display: block; }
+
+  section { padding: 5rem 1.5rem; }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .section-heading {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: var(--green-dark);
+  }
+
+  .section-heading p {
+    color: var(--gray-text);
+    font-size: 1.05rem;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--green);
+    background: rgba(20, 107, 58, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 999px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(255, 138, 61, 0.35);
+  }
+
+  .btn-primary:hover { background: var(--accent-dark); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
+
+  /* ---------- Focus visibility ---------- */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Header / Nav ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--green-dark);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .brand-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--yellow), var(--green-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+  }
+
+  nav#main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--green-dark);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem 1.5rem 1.5rem;
+    display: none;
+  }
+
+  nav#main-nav.open { display: flex; }
+
+  nav#main-nav a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.75rem 0;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  nav#main-nav a.cta-link {
+    color: var(--green-dark);
+    background: var(--yellow);
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+    text-align: center;
+    margin-top: 0.75rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    .nav-toggle { display: none; }
+
+    nav#main-nav {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.75rem;
+      background: transparent;
+      padding: 0;
+    }
+
+    nav#main-nav a { border-bottom: none; padding: 0; }
+
+    nav#main-nav a.cta-link { margin-top: 0; }
+  }
+
+  /* ---------- Hero ---------- */
+  #hero {
+    background: radial-gradient(circle at top left, var(--green-light), var(--green-dark) 70%);
+    color: var(--white);
+    padding: 6rem 1.5rem 4rem;
+    text-align: center;
+  }
+
+  #hero .brand-badge {
+    width: 64px;
+    height: 64px;
+    font-size: 1.8rem;
+    margin: 0 auto 1rem;
+  }
+
+  #hero .team-name {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+    color: var(--yellow-light);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  #hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    font-weight: 800;
+  }
+
+  #hero .subheading {
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .facts-strip {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .facts-strip { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .fact-item {
+    font-weight: 600;
+    color: var(--white);
+    font-size: 0.95rem;
+  }
+
+  .fact-item strong {
+    display: block;
+    font-size: 1.3rem;
+    color: var(--yellow);
+    margin-bottom: 0.2rem;
+  }
+
+  /* ---------- Fade-in on scroll ---------- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- Testimonials ---------- */
+  #testimonials { background: var(--off-white); }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .testimonial-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .stars {
+    color: var(--yellow);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .testimonial-card blockquote {
+    margin: 0 0 1rem;
+    color: var(--gray-text);
+    font-size: 0.95rem;
+    flex-grow: 1;
+  }
+
+  .testimonial-card cite {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+
+  /* ---------- Enquiry Form ---------- */
+  #enquiry { background: var(--white); }
+
+  .form-card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .form-grid { grid-template-columns: 1fr 1fr; }
+    .form-grid .full-width { grid-column: 1 / -1; }
+  }
+
+  .field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--white);
+  }
+
+  .field textarea { resize: vertical; min-height: 100px; }
+
+  .field input.invalid,
+  .field textarea.invalid {
+    border-color: #d64545;
+  }
+
+  .error-msg {
+    display: block;
+    color: #c0392b;
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+    min-height: 1.1em;
+  }
+
+  .form-submit {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .form-submit { width: auto; }
+  }
+
+  #form-status {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: none;
+  }
+
+  #form-status.success {
+    display: block;
+    background: rgba(20, 107, 58, 0.12);
+    color: var(--green-dark);
+  }
+
+  #form-status.failure {
+    display: block;
+    background: rgba(214, 69, 69, 0.12);
+    color: #c0392b;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--green-dark);
+    color: rgba(255, 255, 255, 0.85);
+    padding: 3.5rem 1.5rem 1.5rem;
+  }
+
+  .footer-grid {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .footer-grid h3 {
+    color: var(--white);
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-grid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-grid li { margin-bottom: 0.6rem; }
+
+  .footer-grid a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+
+  .footer-grid a:hover { color: var(--yellow); }
+
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .social-links a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+  }
+
+  .social-links a:hover { background: var(--yellow); color: var(--green-dark); }
+
+  .footer-bottom {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header / Sticky Nav -->
+<header>
+  <div class="nav-wrap">
+    <a href="#hero" class="brand">
+      <span class="brand-badge" aria-hidden="true">🦅</span>
+      Emerald Hawks FC
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">☰</button>
+    <nav id="main-nav" aria-label="Primary">
+      <a href="#hero">Home</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <a href="#enquiry" class="cta-link">Book a Trial</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="team-name">Singapore &middot; Est. 1999</div>
+    <div class="brand-badge" aria-hidden="true">🦅</div>
+    <h1>Being Better, Together</h1>
+    <p class="subheading">Emerald Hawks FC is a community football club for players of every age and skill level — built on certified coaching, disciplined training, and a team that shows up for each other on and off the pitch.</p>
+    <div class="hero-buttons">
+      <a href="#enquiry" class="btn btn-primary">Book a Trial</a>
+      <a href="#testimonials" class="btn btn-secondary">Our Team</a>
+    </div>
+    <div class="facts-strip">
+      <div class="fact-item"><strong>Singapore</strong>Based club, 4 training grounds</div>
+      <div class="fact-item"><strong>100%</strong>Certified, licensed coaches</div>
+      <div class="fact-item"><strong>25+</strong>Years of club history</div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-heading fade-in">
+        <span class="eyebrow">Testimonials</span>
+        <h2>What our athletes say</h2>
+        <p>Real stories from the players and parents who train with us every week.</p>
+      </div>
+      <div class="testimonial-grid">
+        <article class="testimonial-card fade-in">
+          <div class="avatar" style="background: var(--green);">JT</div>
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"Joining Emerald Hawks was the best decision for my son. The coaches genuinely care about development, not just winning, and his confidence on the pitch has grown so much."</blockquote>
+          <cite>Jamie Tan, Parent</cite>
+        </article>
+        <article class="testimonial-card fade-in">
+          <div class="avatar" style="background: var(--accent);">SR</div>
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"I've trained with three clubs in Singapore and this is by far the most organized. Sessions start on time, drills are structured, and the coaches actually track your progress."</blockquote>
+          <cite>Sarah Rahman, U18 Player</cite>
+        </article>
+        <article class="testimonial-card fade-in">
+          <div class="avatar" style="background: var(--green-light);">MK</div>
+          <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+          <blockquote>"Great community feel — I made most of my closest friends through this club. The Saturday matches are the highlight of my week, win or lose."</blockquote>
+          <cite>Marcus Koh, Adult League</cite>
+        </article>
+        <article class="testimonial-card fade-in">
+          <div class="avatar" style="background: var(--yellow); color: var(--green-dark);">PL</div>
+          <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>"25 years of history really shows. There's a culture here that's hard to find elsewhere — disciplined, welcoming, and focused on getting better together."</blockquote>
+          <cite>Priya Lakshmi, Club Alumna</cite>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enquiry Form Section -->
+  <section id="enquiry">
+    <div class="container">
+      <div class="section-heading fade-in">
+        <span class="eyebrow">Get in Touch</span>
+        <h2>Request a Trial</h2>
+        <p>Tell us a bit about yourself and we'll be in touch to schedule your first session.</p>
+      </div>
+
+      <div class="form-card fade-in">
+        <form id="enquiry-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="full-name">Full Name</label>
+              <input type="text" id="full-name" name="fullName" autocomplete="name" aria-describedby="full-name-error">
+              <span class="error-msg" id="full-name-error"></span>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" aria-describedby="email-error">
+              <span class="error-msg" id="email-error"></span>
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-error">
+              <span class="error-msg" id="phone-error"></span>
+            </div>
+
+            <div class="field">
+              <label for="preferred-date">Preferred Date</label>
+              <input type="date" id="preferred-date" name="preferredDate" aria-describedby="preferred-date-error">
+              <span class="error-msg" id="preferred-date-error"></span>
+            </div>
+
+            <div class="field full-width">
+              <label for="message">Message / Reason</label>
+              <textarea id="message" name="message" aria-describedby="message-error" placeholder="Tell us about your experience level, goals, or any questions you have..."></textarea>
+              <span class="error-msg" id="message-error"></span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit">Submit Enquiry</button>
+
+          <div id="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <h3>Emerald Hawks FC</h3>
+      <p>Being better, together. A community football club welcoming players of every age and skill level since 1999.</p>
+      <p>123 Turf Field Road<br>Singapore 519599</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#enquiry">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact Us</h3>
+      <ul>
+        <li>Phone: +65 6123 4567</li>
+        <li>Email: hello@emeraldhawksfc.example</li>
+      </ul>
+      <div class="social-links">
+        <a href="#" aria-label="Emerald Hawks FC on Facebook">f</a>
+        <a href="#" aria-label="Emerald Hawks FC on Instagram">ig</a>
+        <a href="#" aria-label="Emerald Hawks FC on Twitter">tw</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; <span id="year"></span> Emerald Hawks FC. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  // ---------- Nav toggle (mobile) ----------
+  const navToggle = document.getElementById('nav-toggle');
+  const mainNav = document.getElementById('main-nav');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ---------- Fade-in on scroll ----------
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ---------- Footer year ----------
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------- Enquiry form validation & submission ----------
+  const form = document.getElementById('enquiry-form');
+  const status = document.getElementById('form-status');
+
+  const fields = {
+    fullName: document.getElementById('full-name'),
+    email: document.getElementById('email'),
+    phone: document.getElementById('phone'),
+    preferredDate: document.getElementById('preferred-date'),
+    message: document.getElementById('message'),
+  };
+
+  function setError(field, message) {
+    field.classList.toggle('invalid', Boolean(message));
+    const errorEl = document.getElementById(`${field.id}-error`);
+    errorEl.textContent = message;
+  }
+
+  function validate() {
+    let isValid = true;
+
+    if (!fields.fullName.value.trim()) {
+      setError(fields.fullName, 'Please enter your full name.');
+      isValid = false;
+    } else {
+      setError(fields.fullName, '');
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(fields.email.value.trim())) {
+      setError(fields.email, 'Please enter a valid email address.');
+      isValid = false;
+    } else {
+      setError(fields.email, '');
+    }
+
+    const phoneDigits = fields.phone.value.replace(/\D/g, '');
+    if (phoneDigits.length < 7) {
+      setError(fields.phone, 'Please enter a valid phone number.');
+      isValid = false;
+    } else {
+      setError(fields.phone, '');
+    }
+
+    return isValid;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    status.className = '';
+    status.textContent = '';
+
+    if (!validate()) {
+      const firstInvalid = form.querySelector('.invalid');
+      if (firstInvalid) firstInvalid.focus();
+      status.classList.add('failure');
+      status.textContent = 'Please fix the highlighted fields and try again.';
+      return;
+    }
+
+    const data = {
+      fullName: fields.fullName.value.trim(),
+      email: fields.email.value.trim(),
+      phone: fields.phone.value.trim(),
+      preferredDate: fields.preferredDate.value,
+      message: fields.message.value.trim(),
+    };
+
+    // TODO: replace with a real API call, e.g.:
+    // fetch('/api/enquiries', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(data),
+    // });
+    console.log('Enquiry submitted:', data);
+
+    status.classList.add('success');
+    status.textContent = "Thank you! We'll contact you shortly.";
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
