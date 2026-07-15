@@ -789,19 +789,23 @@
   }
 
   .race-photo {
+    position: relative;
     aspect-ratio: 16 / 10;
     border-radius: 8px;
+    overflow: hidden;
     background:
       radial-gradient(ellipse at 30% 20%, rgba(255, 199, 44, 0.35), transparent 55%),
       linear-gradient(150deg, var(--green-mid), var(--deep));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 199, 44, 0.6);
     margin-bottom: 0.8rem;
   }
 
-  .race-photo svg { width: 34px; height: 34px; }
+  .race-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .race-tile h3 {
     font-size: clamp(1.15rem, 1.8vw, 1.5rem);
@@ -1833,7 +1837,7 @@
       <p class="subheading">Austcham Paddle Club is one of Singapore's longest-established paddling clubs — dragon boat, outrigger canoe and single crafts on Kallang Basin. All nationalities, all levels, ages 15 and up.</p>
       <div class="hero-buttons">
         <a href="#enquiry" class="btn btn-primary">Sign Up</a>
-        <a href="#activities" class="btn btn-secondary">Explore the Boats</a>
+        <a href="#activities" class="btn btn-secondary">Explore the Sport</a>
       </div>
     </div>
     <!-- Signature waterline: drifting wave layers with a bobbing silhouette fleet -->
@@ -1875,8 +1879,8 @@
       <div class="board-grid fade-in delay-2">
         <div class="board-item"><strong class="count-up" data-target="1988" data-format="plain">0</strong><span>Founded</span></div>
         <div class="board-item"><strong class="count-up" data-target="3" data-format="plain">0</strong><span>Paddle Disciplines</span></div>
-        <div class="board-item"><strong class="count-up" data-target="2024" data-format="plain">0</strong><span>Worlds Grand Final</span></div>
-        <div class="board-item"><strong class="count-up" data-target="15" data-format="plus">0</strong><span>Open to Ages</span></div>
+        <div class="board-item"><strong class="count-up" data-target="2024" data-format="plain">0</strong><span>World Championship Finalists</span></div>
+        <div class="board-item"><strong class="count-up" data-target="20" data-format="plus">0</strong><span>Nationalities</span></div>
       </div>
     </div>
   </section>
@@ -1992,46 +1996,53 @@
         <h2 class="races-title">Our Latest<br>Races</h2>
         <div class="races-tiles">
           <article class="race-tile" style="--tx: -24vw; --ty: -8vh;">
-            <div class="race-photo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 21 17 4.5"/><path d="M15.2 3.2c1.8-1 3.8.5 3.4 2.4-.3 1.5-1.7 3-3.6 2.6-1.9-.4-2-2.6-1-3.9.3-.4.7-.8 1.2-1.1z" fill="currentColor" stroke="none"/></svg>
+            <div class="race-photo">
+              <img src="Pictures/race-sdbf.jpg" alt="Austcham crew racing at the Singapore Dragonboat Festival, Seniors category" loading="lazy">
             </div>
             <h3>Singapore Dragonboat Festival</h3>
             <p class="race-meta">Dragon Boat · Singapore · 2026</p>
           </article>
           <article class="race-tile" style="--tx: 22vw; --ty: 10vh;">
-            <div class="race-photo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 21 17 4.5"/><path d="M15.2 3.2c1.8-1 3.8.5 3.4 2.4-.3 1.5-1.7 3-3.6 2.6-1.9-.4-2-2.6-1-3.9.3-.4.7-.8 1.2-1.1z" fill="currentColor" stroke="none"/></svg>
+            <div class="race-photo">
+              <img src="Pictures/race-10k.jpg" alt="Paddlers at the Austcham 10km Challenge 2025" loading="lazy">
             </div>
-            <h3>Pesta Sukan</h3>
-            <p class="race-meta">Dragon Boat · Singapore · 2026</p>
+            <h3>Austcham 10k Challenge</h3>
+            <p class="race-meta">Dragon Boat · Singapore River · 2025</p>
           </article>
           <article class="race-tile" style="--tx: -6vw; --ty: 14vh;">
-            <div class="race-photo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 21 17 4.5"/><path d="M15.2 3.2c1.8-1 3.8.5 3.4 2.4-.3 1.5-1.7 3-3.6 2.6-1.9-.4-2-2.6-1-3.9.3-.4.7-.8 1.2-1.1z" fill="currentColor" stroke="none"/></svg>
+            <div class="race-photo">
+              <img src="Pictures/race-worlds.jpg" alt="Austcham medals from the Club Crew World Championships" loading="lazy">
             </div>
             <h3>Club Crew World Championships</h3>
             <p class="race-meta">Dragon Boat · Hualien, Taiwan · 2026</p>
           </article>
           <article class="race-tile" style="--tx: 26vw; --ty: -12vh;">
-            <div class="race-photo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 21 17 4.5"/><path d="M15.2 3.2c1.8-1 3.8.5 3.4 2.4-.3 1.5-1.7 3-3.6 2.6-1.9-.4-2-2.6-1-3.9.3-.4.7-.8 1.2-1.1z" fill="currentColor" stroke="none"/></svg>
+            <div class="race-photo">
+              <img src="Pictures/race-ivf.jpg" alt="Austcham women's crew at the IVF Nationals" loading="lazy">
             </div>
             <h3>International Va'a Association World Sprint Championships</h3>
             <p class="race-meta">Outrigger · Singapore · 2026</p>
           </article>
           <article class="race-tile" style="--tx: -28vw; --ty: 6vh;">
-            <div class="race-photo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 21 17 4.5"/><path d="M15.2 3.2c1.8-1 3.8.5 3.4 2.4-.3 1.5-1.7 3-3.6 2.6-1.9-.4-2-2.6-1-3.9.3-.4.7-.8 1.2-1.1z" fill="currentColor" stroke="none"/></svg>
+            <div class="race-photo">
+              <img src="Pictures/race-hkatir.jpg" alt="Austcham mixed crew at the Hong Kong Around the Island Race" loading="lazy">
             </div>
             <h3>Hong Kong Around the Island Outrigger Canoe Race</h3>
             <p class="race-meta">Outrigger · Hong Kong</p>
           </article>
           <article class="race-tile" style="--tx: 6vw; --ty: -14vh;">
-            <div class="race-photo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 21 17 4.5"/><path d="M15.2 3.2c1.8-1 3.8.5 3.4 2.4-.3 1.5-1.7 3-3.6 2.6-1.9-.4-2-2.6-1-3.9.3-.4.7-.8 1.2-1.1z" fill="currentColor" stroke="none"/></svg>
+            <div class="race-photo">
+              <img src="Pictures/race-busan.jpg" alt="Austcham mixed crew at Busan International 2025" loading="lazy">
             </div>
-            <h3>Osaka Sakura Cup</h3>
-            <p class="race-meta">Osaka, Japan · 2026</p>
+            <h3>Busan International</h3>
+            <p class="race-meta">Dragon Boat · Busan, South Korea · 2025</p>
+          </article>
+          <article class="race-tile" style="--tx: -14vw; --ty: 18vh;">
+            <div class="race-photo">
+              <img src="Pictures/race-oceancup.jpg" alt="Austcham crew at the Singapore Ocean Cup 2025" loading="lazy">
+            </div>
+            <h3>Singapore Ocean Cup</h3>
+            <p class="race-meta">Outrigger · Singapore · 2025</p>
           </article>
         </div>
       </div>
