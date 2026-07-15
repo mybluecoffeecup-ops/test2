@@ -13,12 +13,12 @@ A single-page marketing site for Austcham Paddle Club, one of Singapore's longes
 - Sticky, responsive navbar with a mobile hamburger menu
 - Full-bleed hero with an animated waterline — drifting SVG wave layers and a bobbing fleet of dragon boat / outrigger silhouettes (respects `prefers-reduced-motion`)
 - "Our Mighty Crew" showcase with the club team photo, a cursor-following spotlight, scroll parallax, and club stats that count up on scroll
-- Activities section covering the club's three disciplines — Dragon Boat, Outrigger Canoe, and Single Crafts — plus Land Training & Socials, with tilt-on-hover cards
+- "Pick Your Paddle Style" activities section — Dragon Boat, Outrigger Canoe, Single Crafts, and Land & Socials as media tiles with image headers and a subtle tilt-on-hover interaction
 - Why Austcham section highlighting the club's history (est. 1988) and 2024 IDBF Club Crew World Championships grand final result
 - "Our Latest Races" scroll-driven 3D fly-through — race cards travel toward the viewer as you scroll a pinned stage, with a static grid fallback for `prefers-reduced-motion`
 - SDBA–AustCham 10km Challenge event banner
 - Testimonials grid with real Google reviews and scroll-triggered fade-in animations
-- Membership section with benefits grid, four pricing "lanes" (annual/quarterly, full/affiliate), student pricing, and a three-step how-to-join strip
+- Membership ("Pick Your Lane") section with a benefits bullet list, four pricing "lanes" (annual/quarterly, full/affiliate), student pricing, and a three-step how-to-join strip
 - Weekly training-times grid covering outrigger (Sentosa), dragon boat (Kallang), and land sessions
 - Newbie FAQ accordion (native `<details>`/`<summary>`) with a what-to-bring checklist
 - Enquiry form with client-side validation (name, email, phone), accessible inline error messages, live submission via [FormSubmit](https://formsubmit.co/), and a confetti + voice-message celebration on success
@@ -40,7 +40,7 @@ open index.html
 
 ```
 index.html   # entire site: HTML structure, inline <style>, inline <script>
-Pictures/    # photos referenced by the page (club team photo)
+Pictures/    # image assets referenced by the page (club team photo, boat silhouettes)
 ```
 
 Everything lives in one file, organized into three layers: HTML markup, a single `<style>` block, and a single `<script>` block at the end of `<body>`. See [CLAUDE.md](CLAUDE.md) for a full architecture breakdown.
