@@ -377,7 +377,7 @@
     will-change: transform;
   }
 
-  .waterline .boat svg {
+  .waterline .boat img {
     display: block;
     width: 100%;
     height: auto;
@@ -401,80 +401,100 @@
     position: relative;
     background: #06190f;
     color: var(--white);
-    padding: 5rem 1.5rem 4rem;
+    padding: 3.5rem 1.5rem;
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     overflow: hidden;
+  }
+
+  /* full-bleed team photo layer */
+  .crew-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    margin: 0;
+  }
+
+  .crew-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.9) contrast(1.03);
+    transform: scale(1.05);
+    will-change: transform, opacity;
+  }
+
+  /* legibility scrim: darkens top (behind title) and bottom (behind stats) */
+  .crew-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(6, 25, 15, 0.6), transparent 24%, transparent 58%, rgba(6, 25, 15, 0.86));
   }
 
   /* soft light bloom that trails the cursor (JS sets --mx / --my) */
   .crew-spot {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle 340px at var(--mx, 50%) var(--my, 40%), rgba(247, 245, 238, 0.13), transparent 70%);
+    z-index: 1;
+    background: radial-gradient(circle 340px at var(--mx, 50%) var(--my, 40%), rgba(247, 245, 238, 0.16), transparent 70%);
     pointer-events: none;
   }
 
   .crew-inner {
     position: relative;
+    z-index: 2;
     max-width: 1140px;
     margin: 0 auto;
     width: 100%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
   }
 
   .crew-title {
-    position: relative;
-    z-index: 0;
-    margin: 0 0 -0.32em;
+    margin: 0;
     font-size: clamp(3rem, 11vw, 8.5rem);
     font-weight: 800;
     line-height: 1;
-    background: linear-gradient(180deg, #ffffff 25%, rgba(255, 255, 255, 0.3));
+    background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.55));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-  }
-
-  .crew-photo {
-    position: relative;
-    z-index: 1;
-    margin: 0 auto;
-    width: min(880px, 92vw);
-  }
-
-  .crew-photo img {
-    width: 100%;
-    height: auto;
-    filter: saturate(0.88) contrast(1.03);
-    -webkit-mask-image: radial-gradient(ellipse 76% 86% at 50% 46%, #000 55%, transparent 98%);
-    mask-image: radial-gradient(ellipse 76% 86% at 50% 46%, #000 55%, transparent 98%);
-    will-change: transform;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
   }
 
   .board-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 1rem;
-    margin-top: 0.5rem;
-    text-align: left;
+    gap: 1.6rem 1rem;
+    text-align: center;
   }
 
   .board-item strong {
     display: block;
-    font-weight: 500;
-    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
-    color: #eceeea;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+    color: #ffffff;
     font-variant-numeric: tabular-nums;
-    line-height: 1.1;
+    line-height: 1;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85), 0 1px 3px rgba(0, 0, 0, 0.9);
   }
 
   .board-item span {
     display: block;
-    margin-top: 0.3rem;
-    font-size: 0.85rem;
-    color: rgba(236, 238, 234, 0.6);
+    margin-top: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
   }
 
   @media (min-width: 768px) {
@@ -494,32 +514,50 @@
     position: relative;
     background: var(--white);
     border: 1px solid var(--line);
-    border-top: 4px solid var(--gold);
     border-radius: var(--radius);
-    padding: 2rem 1.8rem 1.6rem;
+    overflow: hidden;
     box-shadow: 0 6px 18px rgba(10, 43, 31, 0.08);
-    transition: box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
     transform-style: preserve-3d;
     will-change: transform;
   }
 
-  .boat-card:hover { box-shadow: var(--shadow); }
+  .boat-card:hover {
+    box-shadow: var(--shadow);
+    border-color: rgba(255, 199, 44, 0.55);
+  }
 
-  .boat-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
+  .boat-photo {
+    position: relative;
+    aspect-ratio: 4 / 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--green);
-    color: var(--gold);
-    margin-bottom: 1.1rem;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255, 199, 44, 0.28), transparent 55%),
+      linear-gradient(150deg, var(--green-mid), var(--deep));
   }
 
-  .boat-icon svg { width: 30px; height: 30px; }
+  .boat-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-  .boat-card h3 { font-size: 1.6rem; color: var(--green); }
+  .boat-watermark {
+    width: 38%;
+    max-width: 84px;
+    height: auto;
+    color: rgba(255, 199, 44, 0.55);
+    transition: transform 0.3s ease;
+  }
+
+  .boat-card:hover .boat-watermark { transform: scale(1.08); }
+
+  .boat-body { padding: 1.4rem 1.5rem 1.5rem; }
 
   .boat-meta {
     font-family: var(--font-mono);
@@ -528,10 +566,12 @@
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: var(--gold-deep);
-    margin-bottom: 0.7rem;
+    margin: 0 0 0.5rem;
   }
 
-  .boat-card p:last-of-type { margin-bottom: 0; color: var(--ink-soft); }
+  .boat-card h3 { font-size: 1.5rem; color: var(--green); margin-bottom: 0.5rem; }
+
+  .boat-desc { margin: 0; color: var(--ink-soft); }
 
   @media (min-width: 640px) {
     .boat-grid { grid-template-columns: repeat(2, 1fr); }
@@ -854,44 +894,39 @@
   /* ---------- Membership ---------- */
   #join { background: var(--white); }
 
-  .benefit-grid {
+  .benefit-list {
+    list-style: none;
+    margin: 0 auto 2.8rem;
+    padding: 0;
+    max-width: 900px;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.2rem;
-    margin-bottom: 3.2rem;
+    gap: 0.75rem 2.4rem;
   }
 
-  .benefit-item {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.5rem 1.4rem;
+  .benefit-list li {
+    position: relative;
+    padding-left: 1.6rem;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.5;
   }
 
-  .benefit-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--green);
-    color: var(--gold);
-    margin-bottom: 0.9rem;
+  .benefit-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
   }
 
-  .benefit-icon svg { width: 24px; height: 24px; }
+  .benefit-list strong { color: var(--green); font-weight: 700; }
 
-  .benefit-item h3 { font-size: 1.25rem; color: var(--green); }
-
-  .benefit-item p { margin: 0; color: var(--ink-soft); font-size: 0.94rem; }
-
-  @media (min-width: 640px) {
-    .benefit-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (min-width: 1024px) {
-    .benefit-grid { grid-template-columns: repeat(3, 1fr); }
+  @media (min-width: 700px) {
+    .benefit-list { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* Pricing lanes */
@@ -1659,7 +1694,7 @@
     .waterline .wave-front { animation: none; }
 
     .waterline .boat,
-    .waterline .boat svg { animation: none; }
+    .waterline .boat img { animation: none; }
 
     /* rest the fleet at scattered positions instead of the drift origin */
     .waterline .boat-1 { transform: translateX(14vw); }
@@ -1685,13 +1720,13 @@
     </a>
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">☰</button>
     <nav id="main-nav" aria-label="Primary">
-      <a href="#activities">The Boats</a>
+      <a href="#activities">The Sports</a>
       <a href="#why-us">Why Austcham</a>
       <a href="#races">Races</a>
       <a href="#challenge">10km Challenge</a>
       <a href="#testimonials">Reviews</a>
       <a href="#join">Membership</a>
-      <a href="#enquiry" class="cta-link">Join a Newbie Day</a>
+      <a href="#enquiry" class="cta-link">Sign Up</a>
     </nav>
   </div>
 </header>
@@ -1705,7 +1740,7 @@
       <h1>Train Hard.<br><span class="play">Play Hard.</span></h1>
       <p class="subheading">Austcham Paddle Club is one of Singapore's longest-established paddling clubs — dragon boat, outrigger canoe and single crafts on Kallang Basin. All nationalities, all levels, ages 15 and up.</p>
       <div class="hero-buttons">
-        <a href="#enquiry" class="btn btn-primary">Join a Newbie Day</a>
+        <a href="#enquiry" class="btn btn-primary">Sign Up</a>
         <a href="#activities" class="btn btn-secondary">Explore the Boats</a>
       </div>
     </div>
@@ -1713,81 +1748,23 @@
     <div class="waterline" aria-hidden="true">
       <!-- farthest boat rides behind the back wave -->
       <div class="boat boat-1" style="width: clamp(90px, 10vw, 130px); bottom: 66px; --drift: 78s; --drift-delay: -30s; --bob: 5.6s; --bob-delay: -1.4s; --boat-opacity: 0.5;">
-        <svg viewBox="0 0 220 44">
-          <g fill="currentColor">
-            <path d="M6 25 Q2 15 9 9 Q12 18 20 23 L178 23 Q186 20 188 12 Q190 6 196 4 Q202 11 207 18 Q211 24 205 28 Q170 35 110 36 Q48 36 14 30 Q8 28 6 25 Z"/>
-            <circle cx="44" cy="15" r="3.4"/><path d="M38 23 Q44 12 50 23 Z"/>
-            <circle cx="72" cy="15" r="3.4"/><path d="M66 23 Q72 12 78 23 Z"/>
-            <circle cx="100" cy="15" r="3.4"/><path d="M94 23 Q100 12 106 23 Z"/>
-            <circle cx="128" cy="15" r="3.4"/><path d="M122 23 Q128 12 134 23 Z"/>
-            <circle cx="156" cy="15" r="3.4"/><path d="M150 23 Q156 12 162 23 Z"/>
-          </g>
-          <g stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <path d="M47 17 L40 33"/><path d="M75 17 L68 33"/><path d="M103 17 L96 33"/><path d="M131 17 L124 33"/><path d="M159 17 L152 33"/>
-          </g>
-        </svg>
+        <img src="Pictures/boat-dragonboat.png" alt="">
       </div>
       <svg class="wave-back" viewBox="0 0 2880 110" preserveAspectRatio="none">
         <path d="M0 70 Q180 30 360 70 T720 70 T1080 70 T1440 70 T1800 70 T2160 70 T2520 70 T2880 70 V110 H0 Z" fill="#145c42"/>
       </svg>
       <!-- mid-water fleet: hulls overlapped by the front wave -->
       <div class="boat boat-2" style="width: clamp(150px, 18vw, 220px); bottom: 50px; --drift: 52s; --drift-delay: -8s; --bob: 4.4s; --boat-opacity: 0.9;">
-        <svg viewBox="0 0 220 44">
-          <g fill="currentColor">
-            <path d="M6 25 Q2 15 9 9 Q12 18 20 23 L178 23 Q186 20 188 12 Q190 6 196 4 Q202 11 207 18 Q211 24 205 28 Q170 35 110 36 Q48 36 14 30 Q8 28 6 25 Z"/>
-            <circle cx="44" cy="15" r="3.4"/><path d="M38 23 Q44 12 50 23 Z"/>
-            <circle cx="72" cy="15" r="3.4"/><path d="M66 23 Q72 12 78 23 Z"/>
-            <circle cx="100" cy="15" r="3.4"/><path d="M94 23 Q100 12 106 23 Z"/>
-            <circle cx="128" cy="15" r="3.4"/><path d="M122 23 Q128 12 134 23 Z"/>
-            <circle cx="156" cy="15" r="3.4"/><path d="M150 23 Q156 12 162 23 Z"/>
-          </g>
-          <g stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <path d="M47 17 L40 33"/><path d="M75 17 L68 33"/><path d="M103 17 L96 33"/><path d="M131 17 L124 33"/><path d="M159 17 L152 33"/>
-          </g>
-        </svg>
+        <img src="Pictures/boat-dragonboat.png" alt="">
       </div>
       <div class="boat boat-3" style="width: clamp(110px, 13vw, 160px); bottom: 56px; --drift: 64s; --drift-delay: -46s; --bob: 5s; --bob-delay: -2.2s; --boat-opacity: 0.8;">
-        <svg viewBox="0 0 170 40">
-          <g fill="currentColor">
-            <path d="M8 21 Q16 17 30 17 L140 17 Q152 16 160 9 Q159 18 148 22 Q100 26 40 25 Q18 25 8 21 Z"/>
-            <circle cx="62" cy="10" r="3.2"/><path d="M56 17 Q62 7 68 17 Z"/>
-            <circle cx="96" cy="10" r="3.2"/><path d="M90 17 Q96 7 102 17 Z"/>
-            <path d="M34 33 Q44 29 66 30 Q64 35 52 36 L42 36 Q36 35 34 33 Z"/>
-          </g>
-          <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M65 12 L58 28"/><path d="M99 12 L92 28"/>
-            <path d="M48 22 L42 32"/><path d="M72 22 L62 31"/>
-          </g>
-        </svg>
+        <img src="Pictures/boat-outrigger.png" alt="">
       </div>
       <div class="boat boat-4" style="width: clamp(170px, 20vw, 240px); bottom: 44px; --drift: 46s; --drift-delay: -22s; --bob: 3.8s; --bob-delay: -0.8s;">
-        <svg viewBox="0 0 220 44">
-          <g fill="currentColor">
-            <path d="M6 25 Q2 15 9 9 Q12 18 20 23 L178 23 Q186 20 188 12 Q190 6 196 4 Q202 11 207 18 Q211 24 205 28 Q170 35 110 36 Q48 36 14 30 Q8 28 6 25 Z"/>
-            <circle cx="44" cy="15" r="3.4"/><path d="M38 23 Q44 12 50 23 Z"/>
-            <circle cx="72" cy="15" r="3.4"/><path d="M66 23 Q72 12 78 23 Z"/>
-            <circle cx="100" cy="15" r="3.4"/><path d="M94 23 Q100 12 106 23 Z"/>
-            <circle cx="128" cy="15" r="3.4"/><path d="M122 23 Q128 12 134 23 Z"/>
-            <circle cx="156" cy="15" r="3.4"/><path d="M150 23 Q156 12 162 23 Z"/>
-          </g>
-          <g stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <path d="M47 17 L40 33"/><path d="M75 17 L68 33"/><path d="M103 17 L96 33"/><path d="M131 17 L124 33"/><path d="M159 17 L152 33"/>
-          </g>
-        </svg>
+        <img src="Pictures/boat-dragonboat.png" alt="">
       </div>
       <div class="boat boat-5" style="width: clamp(100px, 12vw, 150px); bottom: 60px; --drift: 70s; --drift-delay: -60s; --bob: 5.2s; --bob-delay: -3s; --boat-opacity: 0.65;">
-        <svg viewBox="0 0 170 40">
-          <g fill="currentColor">
-            <path d="M8 21 Q16 17 30 17 L140 17 Q152 16 160 9 Q159 18 148 22 Q100 26 40 25 Q18 25 8 21 Z"/>
-            <circle cx="62" cy="10" r="3.2"/><path d="M56 17 Q62 7 68 17 Z"/>
-            <circle cx="96" cy="10" r="3.2"/><path d="M90 17 Q96 7 102 17 Z"/>
-            <path d="M34 33 Q44 29 66 30 Q64 35 52 36 L42 36 Q36 35 34 33 Z"/>
-          </g>
-          <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M65 12 L58 28"/><path d="M99 12 L92 28"/>
-            <path d="M48 22 L42 32"/><path d="M72 22 L62 31"/>
-          </g>
-        </svg>
+        <img src="Pictures/boat-outrigger.png" alt="">
       </div>
       <svg class="wave-front" viewBox="0 0 2880 110" preserveAspectRatio="none">
         <path d="M0 84 Q180 52 360 84 T720 84 T1080 84 T1440 84 T1800 84 T2160 84 T2520 84 T2880 84 V110 H0 Z" fill="#0f3d2e"/>
@@ -1797,12 +1774,12 @@
 
   <!-- Crew showcase: giant headline, team photo, key club numbers (cursor spotlight + staged reveal) -->
   <section id="race-board" aria-label="Club at a glance">
+    <figure class="crew-photo">
+      <img src="Pictures/TeamPhoto%20(10k%202024).JPG" alt="Austcham Paddle Club paddlers celebrating together at the 10km Challenge, 2024" loading="lazy">
+    </figure>
     <div class="crew-spot" aria-hidden="true"></div>
     <div class="crew-inner">
-      <h2 class="crew-title fade-in">Our Mighty Crew</h2>
-      <figure class="crew-photo fade-in delay-1">
-        <img src="Pictures/TeamPhoto%20(10k%202024).JPG" alt="Austcham Paddle Club paddlers celebrating together at the 10km Challenge, 2024" loading="lazy">
-      </figure>
+      <h2 class="crew-title">Our Mighty Crew</h2>
       <div class="board-grid fade-in delay-2">
         <div class="board-item"><strong class="count-up" data-target="1988" data-format="plain">0</strong><span>Founded</span></div>
         <div class="board-item"><strong class="count-up" data-target="3" data-format="plain">0</strong><span>Paddle Disciplines</span></div>
@@ -1816,46 +1793,58 @@
   <section id="activities">
     <div class="container">
       <div class="section-heading fade-in">
-        <span class="eyebrow">The Boats</span>
-        <h2>Pick Your Paddle</h2>
+        <span class="eyebrow">The Sports</span>
+        <h2>Pick Your Paddle Style</h2>
         <p>Three ways onto the water, one crew culture. Every discipline welcomes first-timers and race paddlers alike.</p>
       </div>
 
       <div class="boat-grid">
         <article class="boat-card tilt fade-in">
-          <div class="boat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 15c3-1 5 1 8 1s5-2 8-1c2 .6 3 1.5 4 1-1 3-4 5-10 5S3 19 2 16z"/><path d="M5 15c0-4 3-8 7-10 4 2 7 6 7 10"/><path d="M12 5v10"/></svg>
+          <div class="boat-photo">
+            <!-- PLACEHOLDER: swap for <img class="boat-img" src="…" alt="…"> when a real photo is ready -->
+            <svg class="boat-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 15c3-1 5 1 8 1s5-2 8-1c2 .6 3 1.5 4 1-1 3-4 5-10 5S3 19 2 16z"/><path d="M5 15c0-4 3-8 7-10 4 2 7 6 7 10"/><path d="M12 5v10"/></svg>
           </div>
-          <h3>Dragon Boat</h3>
-          <p class="boat-meta">Kallang Basin · Flagship crews</p>
-          <p>The heart of the club — race crews with consistent medal placements plus sessions built for newcomers. Twenty paddlers, one drum, full send.</p>
+          <div class="boat-body">
+            <p class="boat-meta">Kallang Basin · Flagship crews</p>
+            <h3>Dragon Boat</h3>
+            <p class="boat-desc">The heart of the club — race crews with consistent medal placements plus sessions built for newcomers. Twenty paddlers, one drum, full send.</p>
+          </div>
         </article>
 
         <article class="boat-card tilt fade-in">
-          <div class="boat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16c4-2 14-2 18 0-1 2-4 3.5-9 3.5S4 18 3 16z"/><path d="M2 12h9"/><path d="M4 12v4"/><path d="M9 12v3.5"/><path d="M14 4l-3 12"/></svg>
+          <div class="boat-photo">
+            <!-- PLACEHOLDER: swap for <img class="boat-img" src="…" alt="…"> when a real photo is ready -->
+            <svg class="boat-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16c4-2 14-2 18 0-1 2-4 3.5-9 3.5S4 18 3 16z"/><path d="M2 12h9"/><path d="M4 12v4"/><path d="M9 12v3.5"/><path d="M14 4l-3 12"/></svg>
           </div>
-          <h3>Outrigger Canoe</h3>
-          <p class="boat-meta">Sentosa · OC6 crews</p>
-          <p>Six-seat outrigger canoes trained off Sentosa, with change races around the region. Open-water paddling at its purest — swim test required.</p>
+          <div class="boat-body">
+            <p class="boat-meta">Sentosa · OC6 crews</p>
+            <h3>Outrigger Canoe</h3>
+            <p class="boat-desc">Six-seat outrigger canoes trained off Sentosa, with change races around the region. Open-water paddling at its purest — swim test required.</p>
+          </div>
         </article>
 
         <article class="boat-card tilt fade-in">
-          <div class="boat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17c5-2.5 15-2.5 20 0-2 2-5 3-10 3S4 19 2 17z"/><path d="M18 4 8 15"/><path d="M17 3.2c1.5-.9 3.2.4 2.9 2-.2 1.2-1.4 2.4-3 2.1-1.6-.3-1.7-2.2-.8-3.2.2-.3.5-.6.9-.9z"/></svg>
+          <div class="boat-photo">
+            <!-- PLACEHOLDER: swap for <img class="boat-img" src="…" alt="…"> when a real photo is ready -->
+            <svg class="boat-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 17c5-2.5 15-2.5 20 0-2 2-5 3-10 3S4 19 2 17z"/><path d="M18 4 8 15"/><path d="M17 3.2c1.5-.9 3.2.4 2.9 2-.2 1.2-1.4 2.4-3 2.1-1.6-.3-1.7-2.2-.8-3.2.2-.3.5-.6.9-.9z"/></svg>
           </div>
-          <h3>Single Crafts</h3>
-          <p class="boat-meta">Solo boats · Your pace</p>
-          <p>OC1 and small craft for paddlers who want solo time on the water — technique, fitness and quiet mornings before the city wakes up.</p>
+          <div class="boat-body">
+            <p class="boat-meta">Solo boats · Your pace</p>
+            <h3>Single Crafts</h3>
+            <p class="boat-desc">OC1 and small craft for paddlers who want solo time on the water — technique, fitness and quiet mornings before the city wakes up.</p>
+          </div>
         </article>
 
         <article class="boat-card tilt fade-in">
-          <div class="boat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v4"/><path d="M4 7h4"/><path d="M18 5v4"/><path d="M16 7h4"/><path d="M7 7h10" stroke-dasharray="0"/><circle cx="12" cy="14" r="3"/><path d="M12 17v4"/><path d="M9 21h6"/></svg>
+          <div class="boat-photo">
+            <!-- PLACEHOLDER: swap for <img class="boat-img" src="…" alt="…"> when a real photo is ready -->
+            <svg class="boat-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5v4"/><path d="M4 7h4"/><path d="M18 5v4"/><path d="M16 7h4"/><path d="M7 7h10" stroke-dasharray="0"/><circle cx="12" cy="14" r="3"/><path d="M12 17v4"/><path d="M9 21h6"/></svg>
           </div>
-          <h3>Land &amp; Socials</h3>
-          <p class="boat-meta">Off the water · Play hard</p>
-          <p>Land training keeps the crews sharp; the social calendar keeps them together. We train hard, but we don't forget to play hard.</p>
+          <div class="boat-body">
+            <p class="boat-meta">Off the water · Play hard</p>
+            <h3>Land &amp; Socials</h3>
+            <p class="boat-desc">Land training keeps the crews sharp; the social calendar keeps them together. We train hard, but we don't forget to play hard.</p>
+          </div>
         </article>
       </div>
     </div>
@@ -2034,50 +2023,14 @@
         <p>One club, four ways in. Every membership unlocks the full Austcham experience — train, race, and play hard.</p>
       </div>
 
-      <div class="benefit-grid">
-        <div class="benefit-item fade-in">
-          <div class="benefit-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-2.5 4-2.5 6 0s4 2.5 6 0 4-2.5 6 0"/><path d="M2 18c2-2.5 4-2.5 6 0s4 2.5 6 0 4-2.5 6 0"/><path d="M2 6c2-2.5 4-2.5 6 0s4 2.5 6 0 4-2.5 6 0"/></svg>
-          </div>
-          <h3>Train Without Limits</h3>
-          <p>Every water session at Kallang and Sentosa, plus land training and fitness sessions.</p>
-        </div>
-        <div class="benefit-item fade-in">
-          <div class="benefit-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4c4-2 8 2 14 0v9c-6 2-10-2-14 0"/></svg>
-          </div>
-          <h3>Race the Calendar</h3>
-          <p>Entry to local and international races, with discounted race fees for members.</p>
-        </div>
-        <div class="benefit-item fade-in">
-          <div class="benefit-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
-          </div>
-          <h3>Coaching That Compounds</h3>
-          <p>Experienced coaches and personalised technique development at every level.</p>
-        </div>
-        <div class="benefit-item fade-in">
-          <div class="benefit-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 8.7l5.4-.8z"/></svg>
-          </div>
-          <h3>Member-Only Socials</h3>
-          <p>Exclusive events and gatherings — the "play hard" half of the deal.</p>
-        </div>
-        <div class="benefit-item fade-in">
-          <div class="benefit-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4l4 2 4-2 4 4-3 3v10H7V11L4 8z"/></svg>
-          </div>
-          <h3>Kit &amp; Partner Perks</h3>
-          <p>Exclusive club and race apparel, plus discounts with club partners.</p>
-        </div>
-        <div class="benefit-item fade-in">
-          <div class="benefit-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15.2 14.3c2.2.4 3.8 2.3 3.8 4.7"/></svg>
-          </div>
-          <h3>A Crew, Not Just a Club</h3>
-          <p>An international community with room to grow into leadership and coaching roles.</p>
-        </div>
-      </div>
+      <ul class="benefit-list fade-in">
+        <li><strong>Train without limits</strong> — every water session at Kallang and Sentosa, plus land training and fitness sessions.</li>
+        <li><strong>Race the calendar</strong> — entry to local and international races, with discounted race fees for members.</li>
+        <li><strong>Coaching that compounds</strong> — experienced coaches and personalised technique development at every level.</li>
+        <li><strong>Member-only socials</strong> — exclusive events and gatherings, the "play hard" half of the deal.</li>
+        <li><strong>Kit &amp; partner perks</strong> — exclusive club and race apparel, plus discounts with club partners.</li>
+        <li><strong>A crew, not just a club</strong> — an international community with room to grow into leadership and coaching roles.</li>
+      </ul>
 
       <div class="lane-grid">
         <article class="lane-card lane-card--featured fade-in">
@@ -2382,7 +2335,7 @@
     <div>
       <h3>Quick Links</h3>
       <ul>
-        <li><a href="#activities">The Boats</a></li>
+        <li><a href="#activities">The Sports</a></li>
         <li><a href="#why-us">Why Austcham</a></li>
         <li><a href="#races">Races</a></li>
         <li><a href="#challenge">10km Challenge</a></li>
@@ -2609,7 +2562,9 @@
 
   // ---------- Crew showcase: cursor spotlight + photo parallax ----------
   const crewSection = document.getElementById('race-board');
+  const crewPhoto = crewSection.querySelector('.crew-photo');
   const crewImg = crewSection.querySelector('.crew-photo img');
+  const crewTitle = crewSection.querySelector('.crew-title');
   const canSpot = !prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   if (canSpot) {
@@ -2644,8 +2599,15 @@
       const rect = crewSection.getBoundingClientRect();
       const vh = window.innerHeight;
       if (rect.bottom < 0 || rect.top > vh) return;
-      const progress = (vh - rect.top) / (vh + rect.height); // 0 → 1 as the section crosses the viewport
-      crewImg.style.transform = `translateY(${((progress - 0.5) * -36).toFixed(1)}px)`;
+      // Symmetric fade: full opacity while the section fills the viewport, fading as it leaves either way.
+      const center = rect.top + rect.height / 2;
+      const dist = Math.abs(center - vh / 2);
+      const fade = Math.min(Math.max(1 - (dist - vh * 0.15) / (vh * 0.55), 0), 1);
+      crewPhoto.style.opacity = fade.toFixed(3);
+      crewTitle.style.opacity = fade.toFixed(3);
+      // Gentle parallax kept within the scale(1.05) headroom so the cover photo never gaps.
+      const parallax = (center - vh / 2) / vh;
+      crewImg.style.transform = `scale(1.05) translateY(${(parallax * 24).toFixed(1)}px)`;
     }
 
     window.addEventListener('scroll', () => {
