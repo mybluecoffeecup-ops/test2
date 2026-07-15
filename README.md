@@ -11,9 +11,10 @@ A single-page marketing site for Austcham Paddle Club, one of Singapore's longes
 ## Features
 
 - Sticky, responsive navbar with a mobile hamburger menu
-- Full-bleed hero with an animated waterline (drifting SVG wave layers) and a "race board" stats strip that counts up on scroll (respects `prefers-reduced-motion`)
+- Full-bleed hero with an animated waterline — drifting SVG wave layers and a bobbing fleet of dragon boat / outrigger silhouettes — plus a "race board" stats strip that counts up on scroll (respects `prefers-reduced-motion`)
 - Activities section covering the club's three disciplines — Dragon Boat, Outrigger Canoe, and Single Crafts — plus Land Training & Socials, with tilt-on-hover cards
 - Why Austcham section highlighting the club's history (est. 1988) and 2024 IDBF Club Crew World Championships grand final result
+- "Our Latest Races" scroll-driven 3D fly-through — race cards travel toward the viewer as you scroll a pinned stage, with a static grid fallback for `prefers-reduced-motion`
 - SDBA–AustCham 10km Challenge event banner
 - Testimonials grid with real Google reviews and scroll-triggered fade-in animations
 - Three-step "How to Join" section (indemnity form, member bio, follow socials) with an outrigger swim-test note
