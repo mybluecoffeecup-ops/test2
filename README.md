@@ -2,7 +2,7 @@
 
 A single-page marketing site for Austcham Paddle Club, one of Singapore's longest-established dragon boat and outrigger canoe clubs, built with plain HTML, CSS, and JavaScript — no frameworks, no build step, no dependencies.
 
-**Live site:** https://mybluecoffeecup-ops.github.io/test2/
+**Live site:** https://mybluecoffeecup-ops.github.io/austcham-paddle-club/
 
 ![Austcham Paddle Club homepage screenshot](assets/screenshot.png)
 
@@ -32,8 +32,8 @@ A single-page marketing site for Austcham Paddle Club, one of Singapore's longes
 There's nothing to install or build. Clone the repo and open the file directly in a browser:
 
 ```bash
-git clone https://github.com/mybluecoffeecup-ops/test2.git
-cd test2
+git clone https://github.com/mybluecoffeecup-ops/austcham-paddle-club.git
+cd austcham-paddle-club
 open index.html
 ```
 
