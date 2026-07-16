@@ -13,12 +13,13 @@ A single-page marketing site for Austcham Paddle Club, one of Singapore's longes
 - Sticky, responsive navbar with a mobile hamburger menu
 - Full-bleed hero with an animated waterline — drifting SVG wave layers and a bobbing fleet of dragon boat / outrigger silhouettes (respects `prefers-reduced-motion`)
 - "Our Mighty Crew" showcase with the club team photo, a cursor-following spotlight, scroll parallax, and club stats that count up on scroll
-- "Pick Your Paddle Style" activities section — Dragon Boat, Outrigger Canoe, Single Crafts, and Land & Socials as media tiles with image headers and a subtle tilt-on-hover interaction
+- "Pick Your Paddle Style" swipeable stacked-deck carousel — Dragon Boat, Outrigger Canoe, Single Crafts, and Land & Socials as real photo cards, navigable by drag/swipe, arrow buttons, or dots, with a cursor-following spotlight on desktop
 - Why Austcham section highlighting the club's history (est. 1988) and 2024 IDBF Club Crew World Championships grand final result
 - "Our Latest Races" scroll-driven 3D fly-through — race cards travel toward the viewer as you scroll a pinned stage, with a static grid fallback for `prefers-reduced-motion`
 - SDBA–AustCham 10km Challenge event banner
 - Testimonials grid with real Google reviews and scroll-triggered fade-in animations
-- Membership ("Pick Your Lane") section with a benefits bullet list, four pricing "lanes" (annual/quarterly, full/affiliate), student pricing, and a three-step how-to-join strip
+- Membership ("Pick Your Lane") section styled as a race course — four pricing lanes (annual/quarterly, full/affiliate) separated by animated beaded buoy-rope dividers, a benefits bullet list, and separate student pricing
+- "How Do I Get Started?" banner (modeled on the 10km Challenge banner) with the three-step sign-up flow and a trial CTA
 - Weekly training-times grid covering outrigger (Sentosa), dragon boat (Kallang), and land sessions
 - Newbie FAQ accordion (native `<details>`/`<summary>`) with a what-to-bring checklist
 - Enquiry form with client-side validation (name, email, phone), accessible inline error messages, live submission via [FormSubmit](https://formsubmit.co/), and a confetti + voice-message celebration on success
