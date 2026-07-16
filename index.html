@@ -1023,27 +1023,56 @@
     .benefit-list { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* Pricing lanes */
-  .lane-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.4rem;
+  /* Pricing lanes — a race course with beaded buoy ropes between lanes */
+  /* water: fades in from white at the top into soft green around the lane tops */
+  .lane-pool {
+    background: linear-gradient(180deg, transparent 0, rgba(20, 92, 66, 0.11) 90px);
+    padding: 2rem 0.5rem 0.5rem;
+  }
+
+  .lane-course {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* beaded buoy rope divider — base = horizontal (stacked lanes) */
+  .buoy-rope {
+    --gap: 36px;
+    --bead: 4.5px;
+    flex: 0 0 auto;
+    height: 22px;
+    margin: 0.35rem 0;
+    background:
+      radial-gradient(circle at center, var(--gold) 0 var(--bead), transparent calc(var(--bead) + 1px)) 0 center / calc(var(--gap) * 2) 22px repeat-x,
+      radial-gradient(circle at center, var(--green-mid) 0 var(--bead), transparent calc(var(--bead) + 1px)) var(--gap) center / calc(var(--gap) * 2) 22px repeat-x,
+      linear-gradient(rgba(20, 92, 66, 0.4), rgba(20, 92, 66, 0.4)) center / 100% 2px no-repeat;
+    animation: buoy-bob 3.2s ease-in-out infinite;
+  }
+
+  .buoy-rope:nth-of-type(2) { animation-delay: -0.8s; }
+  .buoy-rope:nth-of-type(3) { animation-delay: -1.7s; }
+
+  @keyframes buoy-bob {
+    0%, 100% { transform: translateY(-5px); }
+    50% { transform: translateY(5px); }
   }
 
   .lane-card {
     position: relative;
+    flex: 0 0 auto;
     background: var(--paper);
     border: 1px solid var(--line);
-    border-top: 4px solid var(--green-mid);
     border-radius: var(--radius);
     padding: 1.8rem 1.5rem 1.5rem;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .lane-card--featured {
     background: var(--deep);
     border-color: var(--gold);
-    border-top-color: var(--gold);
     box-shadow: var(--shadow);
   }
 
@@ -1137,12 +1166,22 @@
     font-weight: 700;
   }
 
-  @media (min-width: 640px) {
-    .lane-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
   @media (min-width: 1024px) {
-    .lane-grid { grid-template-columns: repeat(4, 1fr); }
+    .lane-course { flex-direction: row; align-items: stretch; }
+
+    .lane-card { flex: 1 1 0; }
+
+    /* only the in-course ropes flip to vertical between lane columns */
+    .lane-course .buoy-rope {
+      height: auto;
+      width: 18px;
+      margin: 0 0.25rem;
+      align-self: stretch;
+      background:
+        radial-gradient(circle at center, var(--gold) 0 var(--bead), transparent calc(var(--bead) + 1px)) center 0 / 18px calc(var(--gap) * 2) repeat-y,
+        radial-gradient(circle at center, var(--green-mid) 0 var(--bead), transparent calc(var(--bead) + 1px)) center var(--gap) / 18px calc(var(--gap) * 2) repeat-y,
+        linear-gradient(rgba(20, 92, 66, 0.4), rgba(20, 92, 66, 0.4)) center / 2px 100% no-repeat;
+    }
   }
 
   /* Student strip */
@@ -1193,49 +1232,74 @@
     .student-copy { flex: 1; margin: 0 1.5rem; }
   }
 
-  /* How-to-join strip */
-  .howto-strip {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+  /* Get Started banner — modeled directly on #challenge */
+  #get-started {
     background: var(--deep);
-    border-radius: var(--radius);
-    padding: 1.6rem 1.5rem;
-    margin-top: 2.4rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--white);
+    padding: 3.5rem 1.5rem;
   }
 
-  .howto-step { display: flex; align-items: baseline; gap: 0.7rem; }
+  .getstarted-wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: flex-start;
+  }
 
-  .howto-step p { margin: 0; font-size: 0.95rem; }
+  .getstarted-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+  }
 
-  .howto-no {
+  #get-started h2 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--white);
+    margin: 0 0 0.3em;
+  }
+
+  .getstarted-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 640px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+  }
+
+  .getstarted-steps li { display: flex; align-items: baseline; gap: 0.6rem; }
+
+  .getstarted-no {
     font-family: var(--font-mono);
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     color: var(--gold);
+    flex-shrink: 0;
   }
-
-  .howto-arrow { color: var(--gold); display: none; }
-
-  .howto-cta {
-    color: var(--gold);
-    font-weight: 600;
-    text-decoration-color: rgba(255, 199, 44, 0.5);
-  }
-
-  .howto-cta:hover { color: var(--gold-deep); }
 
   @media (min-width: 900px) {
-    .howto-strip {
+    .getstarted-wrap {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 1.2rem;
+      gap: 2rem;
     }
-    .howto-arrow { display: inline; }
-    .howto-step { flex: 1; }
+    .getstarted-text { max-width: 720px; }
+    .getstarted-steps { flex-direction: row; flex-wrap: wrap; gap: 0.8rem 2rem; }
+    .getstarted-steps li:not(:first-child)::before {
+      content: "→";
+      color: var(--gold);
+      margin-right: -0.1rem;
+    }
   }
 
   /* ---------- Training times ---------- */
@@ -1792,6 +1856,8 @@
 
     .sport-card { transition: none; }
 
+    .buoy-rope { animation: none; transform: none; }
+
     /* rest the fleet at scattered positions instead of the drift origin */
     .waterline .boat-1 { transform: translateX(14vw); }
     .waterline .boat-2 { transform: translateX(52vw); }
@@ -2136,8 +2202,9 @@
         <li><strong>A crew, not just a club</strong> — an international community with room to grow into leadership and coaching roles.</li>
       </ul>
 
-      <div class="lane-grid">
-        <article class="lane-card lane-card--featured fade-in">
+      <div class="lane-pool fade-in">
+        <div class="lane-course">
+        <article class="lane-card lane-card--featured">
           <span class="lane-ribbon">Best Value</span>
           <span class="lane-no" aria-hidden="true">Lane 1</span>
           <h3>Annual</h3>
@@ -2150,7 +2217,8 @@
             <li>Exclusive club and race apparel</li>
           </ul>
         </article>
-        <article class="lane-card fade-in">
+        <div class="buoy-rope" aria-hidden="true"></div>
+        <article class="lane-card">
           <span class="lane-no" aria-hidden="true">Lane 2</span>
           <h3>Quarterly</h3>
           <p class="lane-price">$200</p>
@@ -2162,7 +2230,8 @@
             <li>Exclusive club and race apparel</li>
           </ul>
         </article>
-        <article class="lane-card fade-in">
+        <div class="buoy-rope" aria-hidden="true"></div>
+        <article class="lane-card">
           <span class="lane-no" aria-hidden="true">Lane 3</span>
           <h3>Affiliate Annual</h3>
           <p class="lane-price">$330</p>
@@ -2175,7 +2244,8 @@
             <li>Exclusive club and race apparel</li>
           </ul>
         </article>
-        <article class="lane-card fade-in">
+        <div class="buoy-rope" aria-hidden="true"></div>
+        <article class="lane-card">
           <span class="lane-no" aria-hidden="true">Lane 4</span>
           <h3>Affiliate Quarterly</h3>
           <p class="lane-price">$140</p>
@@ -2188,7 +2258,10 @@
             <li>Exclusive club and race apparel</li>
           </ul>
         </article>
+        </div>
       </div>
+
+      <div class="buoy-rope fade-in" aria-hidden="true"></div>
 
       <div class="student-strip fade-in">
         <span class="lane-no" aria-hidden="true">Student Lane</span>
@@ -2201,23 +2274,22 @@
           <span class="student-price">$120<small>/quarter</small></span>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="howto-strip fade-in">
-        <div class="howto-step">
-          <span class="howto-no" aria-hidden="true">01</span>
-          <p>Sign up for a trial package — two dragon boat sessions.</p>
-        </div>
-        <span class="howto-arrow" aria-hidden="true">→</span>
-        <div class="howto-step">
-          <span class="howto-no" aria-hidden="true">02</span>
-          <p>Select your plan and complete payment.</p>
-        </div>
-        <span class="howto-arrow" aria-hidden="true">→</span>
-        <div class="howto-step">
-          <span class="howto-no" aria-hidden="true">03</span>
-          <p><a class="howto-cta" href="#enquiry">"Get stuck in!" — start with a trial</a></p>
-        </div>
+  <!-- Get Started banner (modeled on the 10km Challenge banner) -->
+  <section id="get-started">
+    <div class="getstarted-wrap fade-in">
+      <div class="getstarted-text">
+        <p class="getstarted-label">Getting Started</p>
+        <h2>How Do I Get Started?</h2>
+        <ol class="getstarted-steps">
+          <li><span class="getstarted-no" aria-hidden="true">01</span> Sign up for a trial package — two dragon boat sessions.</li>
+          <li><span class="getstarted-no" aria-hidden="true">02</span> Select your plan and complete payment.</li>
+          <li><span class="getstarted-no" aria-hidden="true">03</span> Show up and get stuck in.</li>
+        </ol>
       </div>
+      <a href="#enquiry" class="btn btn-primary">Start With a Trial</a>
     </div>
   </section>
 
