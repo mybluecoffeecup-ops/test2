@@ -10,7 +10,7 @@ A single-page marketing site for Austcham Paddle Club, one of Singapore's longes
 
 ## Features
 
-- Sticky, responsive navbar with a mobile hamburger menu
+- Sticky, responsive navbar with the club crest logo, an underline treatment marking each link, and a mobile hamburger menu
 - Full-bleed hero with an animated waterline — drifting SVG wave layers and a bobbing fleet of dragon boat / outrigger silhouettes (respects `prefers-reduced-motion`)
 - "Our Mighty Crew" showcase with the club team photo, a cursor-following spotlight, scroll parallax, and club stats that count up on scroll
 - "Pick Your Paddle Style" swipeable stacked-deck carousel — Dragon Boat, Outrigger Canoe, Single Crafts, and Land & Socials as real photo cards, navigable by drag/swipe, arrow buttons, or dots, with a cursor-following spotlight on desktop
